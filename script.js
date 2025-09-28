@@ -1,4 +1,3 @@
-// Data untuk autocomplete
 const studentNames = [
     'Ahmad Rizki Pratama', 'Siti Nurhaliza', 'Budi Santoso', 'Dewi Sartika',
     'Muhammad Fadlan', 'Aisyah Putri', 'Rudi Hermawan', 'Maya Sari',
@@ -21,7 +20,6 @@ const lecturers = [
     'Drs. Agus Salim, M.T.', 'Dr. Lina Marlina, S.T., M.Kom'
 ];
 
-// Data untuk dropdown dinamis
 const deviceData = {
     laptop: {
         asus: {
@@ -79,20 +77,17 @@ const deviceData = {
     }
 };
 
-// Fungsi untuk menampilkan alert
 function showAlert(elementId, message, type = 'info') {
     const alertElement = document.getElementById(elementId);
     alertElement.textContent = message;
     alertElement.className = `alert ${type}`;
     alertElement.style.display = 'block';
     
-    // Hide alert after 5 seconds
     setTimeout(() => {
         alertElement.style.display = 'none';
     }, 5000);
 }
 
-// Fungsi autocomplete
 function setupAutocomplete(inputId, data, listId) {
     const input = document.getElementById(inputId);
     const list = document.getElementById(listId);
@@ -110,7 +105,7 @@ function setupAutocomplete(inputId, data, listId) {
 
         const matches = data.filter(item => 
             item.toLowerCase().includes(value)
-        ).slice(0, 5); // Limit to 5 results
+        ).slice(0, 5); 
 
         if (matches.length === 0) {
             list.style.display = 'none';
@@ -131,7 +126,6 @@ function setupAutocomplete(inputId, data, listId) {
         list.style.display = 'block';
     });
 
-    // Keyboard navigation
     input.addEventListener('keydown', function(e) {
         const items = list.querySelectorAll('.autocomplete-item');
         
@@ -162,7 +156,6 @@ function setupAutocomplete(inputId, data, listId) {
         });
     }
 
-    // Hide list when clicking outside
     document.addEventListener('click', function(e) {
         if (!input.contains(e.target) && !list.contains(e.target)) {
             list.style.display = 'none';
@@ -170,12 +163,10 @@ function setupAutocomplete(inputId, data, listId) {
     });
 }
 
-// Setup autocomplete untuk semua field
 setupAutocomplete('studentName', studentNames, 'nameAutocomplete');
 setupAutocomplete('subject', subjects, 'subjectAutocomplete');
 setupAutocomplete('lecturer', lecturers, 'lecturerAutocomplete');
 
-// Form Registration Handler
 document.getElementById('registrationForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -186,7 +177,6 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         lecturer: document.getElementById('lecturer').value.trim()
     };
 
-    // Validation
     const emptyFields = [];
     for (const [key, value] of Object.entries(formData)) {
         if (!value) {
@@ -207,18 +197,15 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         return;
     }
 
-    // Success message
     showAlert('registrationAlert', 
         `Registrasi berhasil! Mahasiswa ${formData.studentName} (${formData.nim}) 
          telah terdaftar untuk mata kuliah ${formData.subject} dengan dosen ${formData.lecturer}.`, 
         'success'
     );
     
-    // Reset form
     this.reset();
 });
 
-// ===== KODE POS SEARCH - BERDASARKAN LOGIKA TEMAN ANDA =====
 let provinsi = document.getElementById("provinsi")
 let kabupaten = document.getElementById("kabupaten") 
 let kecamatan = document.getElementById("kecamatan")
@@ -251,7 +238,6 @@ async function updateKodePos() {
     }
 }
 
-// Fungsi untuk clear form
 function clearForm() {
     provinsi.value = ""
     kabupaten.value = ""
@@ -259,17 +245,14 @@ function clearForm() {
     kodepos.value = ""
 }
 
-// Event listeners untuk auto-update kode pos
 provinsi.addEventListener('input', updateKodePos)
 kabupaten.addEventListener('input', updateKodePos)
 kecamatan.addEventListener('input', updateKodePos)
 
-// Prevent form submission
 document.getElementById('postalCodeForm').addEventListener('submit', function(e) {
     e.preventDefault()
 })
 
-// ===== DYNAMIC DROPDOWN SETUP =====
 const deviceTypeSelect = document.getElementById('deviceType');
 const deviceBrandSelect = document.getElementById('deviceBrand');
 const deviceModelSelect = document.getElementById('deviceModel');
@@ -278,7 +261,6 @@ const deviceInfoDiv = document.getElementById('deviceInfo');
 deviceTypeSelect.addEventListener('change', function() {
     const selectedType = this.value;
     
-    // Reset dependent dropdowns
     deviceBrandSelect.innerHTML = '<option value="">-- Pilih Brand --</option>';
     deviceModelSelect.innerHTML = '<option value="">-- Pilih Model --</option>';
     deviceInfoDiv.style.display = 'none';
@@ -289,7 +271,6 @@ deviceTypeSelect.addEventListener('change', function() {
         return;
     }
     
-    // Populate brands
     const brands = Object.keys(deviceData[selectedType]);
     brands.forEach(brand => {
         const option = document.createElement('option');
@@ -314,7 +295,6 @@ deviceBrandSelect.addEventListener('change', function() {
         return;
     }
     
-    // Populate models
     const models = deviceData[selectedType][selectedBrand].models;
     models.forEach(model => {
         const option = document.createElement('option');
@@ -336,7 +316,6 @@ deviceModelSelect.addEventListener('change', function() {
         return;
     }
     
-    // Show device info
     const info = deviceData[selectedType][selectedBrand].info;
     deviceInfoDiv.innerHTML = `
         <h4>Informasi Device</h4>
@@ -348,10 +327,9 @@ deviceModelSelect.addEventListener('change', function() {
     deviceInfoDiv.style.display = 'block';
 });
 
-// Initialize page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Form Registrasi Mahasiswa loaded successfully!');
     
-    // Set focus to first input
     document.getElementById('studentName').focus();
+
 });
