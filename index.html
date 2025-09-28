@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi Mahasiswa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistem Registrasi Mahasiswa</h1>
+        
+        <div class="section">
+            <h2>1. Form Registrasi Mahasiswa</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="studentName">Nama Mahasiswa:</label>
+                    <input type="text" id="studentName" name="studentName" placeholder="Masukkan nama mahasiswa">
+                    <div id="nameAutocomplete" class="autocomplete-list"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nim">NIM:</label>
+                    <input type="text" id="nim" name="nim" placeholder="Masukkan NIM">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Mata Kuliah:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Masukkan mata kuliah">
+                    <div id="subjectAutocomplete" class="autocomplete-list"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lecturer">Dosen:</label>
+                    <input type="text" id="lecturer" name="lecturer" placeholder="Masukkan nama dosen">
+                    <div id="lecturerAutocomplete" class="autocomplete-list"></div>
+                </div>
+                
+                <button type="submit">Daftar</button>
+                <button type="reset">Reset</button>
+            </form>
+            
+            <div id="registrationAlert" class="alert"></div>
+        </div>
+
+        <div class="section">
+            <h2>2. Pencarian Kode Pos Indonesia</h2>
+            <p class="section-desc">Masukkan daerah untuk mendapatkan kode pos</p>
+            
+            <form id="postalCodeForm">
+                <div class="form-group">
+                    <label for="provinsi">Provinsi:</label>
+                    <input type="text" id="provinsi" name="provinsi" placeholder="Contoh: Jawa Timur">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kabupaten">Kabupaten/Kota:</label>
+                    <input type="text" id="kabupaten" name="kabupaten" placeholder="Contoh: Surabaya">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kecamatan">Kecamatan:</label>
+                    <input type="text" id="kecamatan" name="kecamatan" placeholder="Contoh: Genteng">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kodepos">Kode Pos:</label>
+                    <input type="text" id="kodepos" name="kodepos" placeholder="Kode pos akan muncul otomatis..." readonly>
+                </div>
+                
+                <button type="button" onclick="clearForm()">Reset</button>
+            </form>
+            
+            <div id="postalCodeAlert" class="alert"></div>
+        </div>
+
+        <div class="section">
+            <h2>3. List Dropdown Dinamis</h2>
+            <div class="form-group">
+                <label for="deviceType">Pilih Jenis Device:</label>
+                <select id="deviceType">
+                    <option value="">-- Pilih Jenis Device --</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="smartphone">Smartphone</option>
+                    <option value="desktop">Desktop</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="deviceBrand">Pilih Brand:</label>
+                <select id="deviceBrand" disabled>
+                    <option value="">-- Pilih Brand --</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="deviceModel">Pilih Model:</label>
+                <select id="deviceModel" disabled>
+                    <option value="">-- Pilih Model --</option>
+                </select>
+            </div>
+            
+            <div id="deviceInfo" class="device-info"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
